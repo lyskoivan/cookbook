@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const oldRecipe = require("./old_recipe");
+
 const cookbookSchema = new Schema({
   title: {
     type: String,
@@ -15,6 +17,12 @@ const cookbookSchema = new Schema({
     required: true,
     default: Date.now
   }
+  // versions: [
+  //   {
+  //     type: mongoose.Types.ObjectId,
+  //     ref: "oldrecipes"
+  //   }
+  // ]
 });
 
 const Cookbook = mongoose.model("Cookbook", cookbookSchema);
@@ -22,6 +30,7 @@ const Cookbook = mongoose.model("Cookbook", cookbookSchema);
 module.exports = {
   async getAllRecipes() {
     return await Cookbook.find();
+    // return await Cookbook.find().populate("oldrecipes");
   },
 
   /**
@@ -39,6 +48,7 @@ module.exports = {
   },
 
   async deleteRecipe(id) {
+    await oldRecipe.removeRecipeVersion(id);
     return await Cookbook.findByIdAndDelete(id);
   }
 };
