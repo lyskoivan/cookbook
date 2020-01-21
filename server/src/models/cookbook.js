@@ -20,6 +20,10 @@ const cookbookSchema = new Schema({
 const Cookbook = mongoose.model("Cookbook", cookbookSchema);
 
 module.exports = {
+  async getAllRecipes() {
+    return await Cookbook.find();
+  },
+
   /**
    * Added recipe to Cookbook collection.
    *
@@ -28,5 +32,13 @@ module.exports = {
   async createRecipe(data) {
     const recipes = new Cookbook(data);
     return await recipes.save();
+  },
+
+  async updateRecipe(id, data) {
+    return await Cookbook.findByIdAndUpdate(id, data);
+  },
+
+  async deleteRecipe(id) {
+    return await Cookbook.findByIdAndDelete(id);
   }
 };

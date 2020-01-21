@@ -17,10 +17,14 @@ module.exports = {
   },
 
   updateRecipe(req, res, next) {
-    if (empty(req.body)) {
-      return res.status("400").json({ errors: ["No data"] });
+    const validate = validationShema.validate(req.body, {
+      presence: "optional"
+    });
+    if (!validate.error) {
+      req.body = validate.value;
+      return next();
     }
-
-    next();
+    console.error(validate.error);
+    res.status(400).json({ errors: "Validate error" });
   }
 };
