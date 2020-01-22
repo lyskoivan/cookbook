@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8000/api/';
+axios.defaults.baseURL = process.env.baseURL || 'http://localhost:8000';
 
 export default {
   async getAllRecipes() {
     try {
-      const getRecipes = await axios.get('/recipes/');
+      const getRecipes = await axios.get('/api/recipes/');
 
       return getRecipes.data;
     } catch (error) {
@@ -15,7 +15,7 @@ export default {
 
   async createRecipe(data) {
     try {
-      const addRecipe = await axios.post('/recipes/', {
+      const addRecipe = await axios.post('/api/recipes/', {
         title: data.title,
         description: data.description,
       });
@@ -30,7 +30,7 @@ export default {
     try {
       const recipe = await axios({
         method: 'delete',
-        url: `/recipes/${id}`,
+        url: `/api/recipes/${id}`,
       });
 
       return recipe.data;
@@ -41,7 +41,7 @@ export default {
 
   async updateRecipe(id, updateData) {
     try {
-      const updateRecipe = await axios.put(`/recipes/${id}`, updateData);
+      const updateRecipe = await axios.put(`/api/recipes/${id}`, updateData);
 
       return updateRecipe.data;
     } catch (error) {
@@ -51,7 +51,7 @@ export default {
 
   async getOldRecipe(id) {
     try {
-      const getRecipe = await axios.get(`/old/${id}`);
+      const getRecipe = await axios.get(`/api/old/${id}`);
 
       return getRecipe.data;
     } catch (error) {
