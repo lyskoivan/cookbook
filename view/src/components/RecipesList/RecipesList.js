@@ -3,21 +3,30 @@ import PropTypes from 'prop-types';
 
 import RecipesListItem from '../RecipesListItem/RecipesListItem';
 
-const RecipesList = ({ recipes, onRemoveRecipe, onEditRecipe }) =>
-  recipes.length > 0 && (
-    <ul>
-      {recipes.map(recipe => (
-        <li key={recipe._id}>
-          <RecipesListItem
-            title={recipe.title}
-            description={recipe.description}
-            onRemoveRecipe={() => onRemoveRecipe(recipe._id)}
-            onEditRecipe={() => onEditRecipe(recipe._id)}
-          />
-        </li>
-      ))}
-    </ul>
+import style from './RecipesList.module.css';
+
+const RecipesList = ({ recipes, onRemoveRecipe, onEditRecipe }) => {
+  const showItems = recipes.map(recipe => {
+    const parseDate = new Date(recipe.date);
+    const date = parseDate.toLocaleString('en-US');
+    return (
+      <li key={recipe._id} className={style.recipes_list__item}>
+        <RecipesListItem
+          title={recipe.title}
+          description={recipe.description}
+          id={recipe._id}
+          date={date}
+          onRemoveRecipe={() => onRemoveRecipe(recipe._id)}
+          onEditRecipe={() => onEditRecipe(recipe._id)}
+        />
+      </li>
+    );
+  });
+
+  return (
+    recipes.length > 0 && <ul className={style.recipes_list}>{showItems}</ul>
   );
+};
 
 RecipesList.propTypes = {
   recipes: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,

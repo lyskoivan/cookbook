@@ -17,27 +17,15 @@ const cookbookSchema = new Schema({
     required: true,
     default: Date.now
   }
-  // versions: [
-  //   {
-  //     type: mongoose.Types.ObjectId,
-  //     ref: "oldrecipes"
-  //   }
-  // ]
 });
 
 const Cookbook = mongoose.model("Cookbook", cookbookSchema);
 
 module.exports = {
   async getAllRecipes() {
-    return await Cookbook.find();
-    // return await Cookbook.find().populate("oldrecipes");
+    return await Cookbook.find().sort({ date: "desc" });
   },
 
-  /**
-   * Added recipe to Cookbook collection.
-   *
-   * @param {{title: String, description: String}} data Waiting title and description
-   */
   async createRecipe(data) {
     const recipes = new Cookbook(data);
     return await recipes.save();

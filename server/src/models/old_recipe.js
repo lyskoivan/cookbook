@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+
 const oldRecipe = new Schema({
   refId: Schema.Types.ObjectId,
   oldVersion: []
@@ -26,7 +27,7 @@ module.exports = {
   },
 
   async getOldRecipe(id) {
+    console.log(id);
     return await OldRecipe.findOne({ refId: id });
-    // return await Cookbook.find().populate("oldrecipes");
   }
 };

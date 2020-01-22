@@ -1,0 +1,13 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.button {
+  background-color: #ff9a00;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  min-width: 130px;
+  padding: 12px;
+  font-weight: 700;
+  border: none;
+}

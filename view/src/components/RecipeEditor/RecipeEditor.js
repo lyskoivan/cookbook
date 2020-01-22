@@ -61,8 +61,10 @@ class RecipeEditor extends Component {
           placeholder="Enter description..."
         />
         <div>
-          <button type="submit">Save</button>
-          <button type="button" onClick={onCancel}>
+          <button className={`${styles.button} button`} type="submit">
+            Save
+          </button>
+          <button className="button" type="button" onClick={onCancel}>
             Cancel
           </button>
         </div>

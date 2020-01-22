@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import recipesAPI from '../../services/api';
 
-import Toggler from '../Toggler/Toggler';
 import Modal from '../Modal/Modal';
 import RecipeEditor from '../RecipeEditor/RecipeEditor';
 import RecipesList from '../RecipesList/RecipesList';
+
+import style from './App.module.css';
 
 export default class App extends Component {
   static propType = {
@@ -14,6 +15,7 @@ export default class App extends Component {
     isCreating: PropTypes.bool.isRequired,
     isEditing: PropTypes.bool.isRequired,
     selectedRecipeId: PropTypes.string.isRequired,
+    oldRecipes: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
   };
 
   state = {
@@ -27,13 +29,6 @@ export default class App extends Component {
     this.updateRecipes();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.recipes !== this.state.recipes) {
-  //     console.log('update');
-  //     this.updateRecipes();
-  //   }
-  // }
-
   updateRecipes = () => {
     recipesAPI.getAllRecipes().then(recipes => {
       this.setState({ recipes });
@@ -45,15 +40,11 @@ export default class App extends Component {
       .createRecipe(newRecipe)
       .then(() => {
         this.updateRecipes();
-        //  if componentDidUpdate -> then(addedRecipe => {
-        //   this.setState(state => ({
-        //     recipes: [...state.recipes, addedRecipe],
-        //   }));
       })
       .finally(this.closeCreateRecipeModal);
   };
 
-  updateRecipe = ({ title, description }) => {
+  editRecipe = ({ title, description }) => {
     recipesAPI
       .updateRecipe(this.state.selectedRecipeId, { title, description })
       .then(() => {
@@ -92,12 +83,17 @@ export default class App extends Component {
 
   render() {
     const { recipes, isCreating, isEditing, selectedRecipeId } = this.state;
+
     const recipeInEdit = recipes.find(
       recipe => recipe._id === selectedRecipeId,
     );
     return (
       <>
-        <button type="button" onClick={this.openCreateRecipeModal}>
+        <button
+          type="button"
+          onClick={this.openCreateRecipeModal}
+          className={`${style.button} button`}
+        >
           New recipe
         </button>
         <RecipesList
@@ -116,7 +112,7 @@ export default class App extends Component {
         {isEditing && (
           <Modal onClose={this.closeEditRecipeModal}>
             <RecipeEditor
-              onSave={this.updateRecipe}
+              onSave={this.editRecipe}
               onCancel={this.closeEditRecipeModal}
               title={recipeInEdit.title}
               description={recipeInEdit.description}

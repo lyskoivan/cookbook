@@ -1,0 +1,38 @@
+.recipe_info {
+  text-align: center;
+}
+.date {
+  text-align: right;
+}
+
+.recipe_item__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe_show_version {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe_controls__button {
+  background-color: #ff9a00;
+  color: #fff;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  min-width: 130px;
+  padding: 12px;
+  font-weight: 600;
+}
+.recipe_controls__button:first-child {
+  margin-right: 5px;
+}
+
+.show__button {
+  max-width: 130px;
+  display: block;
+  margin-left: auto;
+}
