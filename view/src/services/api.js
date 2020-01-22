@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = process.env.baseURL || 'http://localhost:8000';
+axios.defaults.baseURL =
+  'https://bs-cookbook.herokuapp.com' || 'http://localhost:8000';
 
 export default {
   async getAllRecipes() {
