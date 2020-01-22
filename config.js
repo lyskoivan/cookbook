@@ -1,5 +1,5 @@
 module.exports = {
-  port: 8080,
+  port: process.env.PORT || 8000,
   connectionUrl:
     "mongodb+srv://ivan:admin@bstask-lh2uk.mongodb.net/BS?retryWrites=true&w=majority"
 };
