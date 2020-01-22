@@ -15,11 +15,11 @@ app.disable("x-powered-by");
 app.use(logger("dev"));
 app.use(cors("*"));
 
-app.use(express.static(path.join(__dirname, "../", "view", "build")));
+app.use(express.static(path.join(__dirname, "view", "build")));
 
 app.use("/api", routes);
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "view", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "view", "build", "index.html"));
 });
 
 app.listen(config.port, () => {
