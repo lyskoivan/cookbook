@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
 import recipesAPI from '../../services/api';
+import OldRecipeItem from '../OldRecipeItem/OldRecipeItem';
 
 import styles from './OldRecipe.module.css';
 
 class OldRecipe extends Component {
-  static propType = {
-    oldRecipes: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
+  static propTypes = {
     recipeId: PropTypes.string.isRequired,
   };
 
@@ -36,9 +36,11 @@ class OldRecipe extends Component {
       const date = parseDate.toLocaleString('en-US');
       return (
         <li key={shortid.generate()} className={styles.version_list__item}>
-          <p className={styles.date}>{date}</p>
-          <h3 className={styles.title}>{recipe.title}</h3>
-          <p>{recipe.description}</p>
+          <OldRecipeItem
+            date={date}
+            title={recipe.title}
+            description={recipe.description}
+          />
         </li>
       );
     });

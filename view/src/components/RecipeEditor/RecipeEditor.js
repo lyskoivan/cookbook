@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Notyf } from 'notyf';
 
 import styles from './RecipeEditor.module.css';
+
+const notyf = new Notyf();
 
 class RecipeEditor extends Component {
   static propTypes = {
@@ -29,8 +32,12 @@ class RecipeEditor extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (!this.state.title || !this.state.description) return;
+    if (!this.state.title || !this.state.description) {
+      notyf.error('Заполните поля редактора');
+      return;
+    }
     this.props.onSave({ ...this.state });
+    notyf.success('Заметка успешно добавлена 🎉');
 
     this.setState({
       title: '',
@@ -60,11 +67,15 @@ class RecipeEditor extends Component {
           onChange={this.handleChange}
           placeholder="Enter description..."
         />
-        <div>
+        <div className={styles.modal_buttons}>
           <button className={`${styles.button} button`} type="submit">
             Save
           </button>
-          <button className="button" type="button" onClick={onCancel}>
+          <button
+            className={`${styles.button} button`}
+            type="button"
+            onClick={onCancel}
+          >
             Cancel
           </button>
         </div>

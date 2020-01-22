@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import recipesAPI from '../../services/api';
 
@@ -10,14 +9,6 @@ import RecipesList from '../RecipesList/RecipesList';
 import style from './App.module.css';
 
 export default class App extends Component {
-  static propType = {
-    recipes: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
-    isCreating: PropTypes.bool.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    selectedRecipeId: PropTypes.string.isRequired,
-    oldRecipes: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
-  };
-
   state = {
     recipes: [],
     isCreating: false,

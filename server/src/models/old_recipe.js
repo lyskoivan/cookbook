@@ -27,7 +27,6 @@ module.exports = {
   },
 
   async getOldRecipe(id) {
-    console.log(id);
     return await OldRecipe.findOne({ refId: id });
   }
 };

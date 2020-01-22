@@ -30,7 +30,11 @@ const RecipesListItem = ({
           >
             Edit
           </button>
-          <button className="button" type="button" onClick={onRemoveRecipe}>
+          <button
+            className={`${style.recipe_controls__button} button`}
+            type="button"
+            onClick={onRemoveRecipe}
+          >
             Delete
           </button>
         </div>
