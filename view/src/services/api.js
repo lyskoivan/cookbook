@@ -41,7 +41,7 @@ export default {
 
   async updateRecipe(id, updateData) {
     try {
-      const updateRecipe = await axios.patch(`/${id}`, updateData);
+      const updateRecipe = await axios.put(`/${id}`, updateData);
 
       return updateRecipe.data;
     } catch (error) {

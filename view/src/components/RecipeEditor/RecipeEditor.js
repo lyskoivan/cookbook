@@ -5,9 +5,15 @@ import styles from './RecipeEditor.module.css';
 
 class RecipeEditor extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    title: '',
+    description: '',
   };
 
   state = {
@@ -23,11 +29,14 @@ class RecipeEditor extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    if (!this.state.title || !this.state.description) return;
+    this.props.onSave({ ...this.state });
 
     this.setState({
       title: '',
       description: '',
     });
+    this.props.onCancel();
   };
 
   render() {
