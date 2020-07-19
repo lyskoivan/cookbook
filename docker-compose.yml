@@ -1,0 +1,23 @@
+version: "3"
+services:
+  view:
+    container_name: view-cookbook
+    restart: always
+    build: ./docker/view
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./view:/app/view
+    stdin_open: true
+    tty: true
+
+  cookbook:
+    container_name: cookbook-api
+    restart: always
+    build: ./docker/server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app/server
+    stdin_open: true
+    tty: true
