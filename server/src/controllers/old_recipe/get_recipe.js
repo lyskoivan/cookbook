@@ -2,7 +2,6 @@ const OldRecipe = require("../../models/old_recipe");
 
 const get_recipe = async (req, res) => {
   try {
-    console.log(req.params.id);
     const recipes = await OldRecipe.getOldRecipe(req.params.id);
 
     res.status(200).json(recipes);

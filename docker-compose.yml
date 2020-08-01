@@ -17,6 +17,7 @@ services:
     build: ./docker/server
     ports:
       - "8000:8000"
+      - "127.0.0.1:9229:9229"
     volumes:
       - ./server:/app/server
     stdin_open: true
