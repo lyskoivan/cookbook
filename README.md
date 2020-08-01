@@ -17,7 +17,7 @@ docker exec -ti cookbook-api bash -c 'npm i && npm start'
 
 ## Usage Without Docker
 
-- Go into the server repository: `cd cookbook/view`
+- Go into the view repository: `cd cookbook/view`
 - Install the application: `npm install`
 - Create build: `npm run build` - For production
 - Or run view: `npm start`
